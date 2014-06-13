@@ -3,6 +3,7 @@ package me.phantom64.teamdeathmatch;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.phantom64.teamdeathmatch.commands.CommandSetSpawn;
 import me.phantom64.teamdeathmatch.listeners.PlayerDeath;
 import me.phantom64.teamdeathmatch.utils.GameManager;
 import me.phantom64.teamdeathmatch.utils.LocationHandler;
@@ -10,6 +11,9 @@ import me.phantom64.teamdeathmatch.utils.TeamManager;
 import me.phantom64.teamdeathmatch.utils.TeamManager.Team;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,11 +59,6 @@ public class TeamDeathMatch extends JavaPlugin {
 		registerListeners(new PlayerDeath());
 	}
 	
-	@Override
-	public void onDisable() {
-		
-	}
-	
 	private void registerListeners(Listener... listeners) {
 		for (Listener listener : listeners) {
 			getServer().getPluginManager().registerEvents(listener, this);
@@ -80,6 +79,25 @@ public class TeamDeathMatch extends JavaPlugin {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {
+		
+		if (label.equalsIgnoreCase("tdm")) {
+			
+			if (sender instanceof Player) {
+				if (args[0].equalsIgnoreCase("setspawn")) {
+					CommandSetSpawn.execute((Player)sender, args);
+				}
+			} else {
+				sender.sendMessage(ChatColor.RED + "Only players can use this command.");
+			}
+			
+		}
+		
+		return true;
+		
 	}
 
 }
