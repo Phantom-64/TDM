@@ -6,7 +6,10 @@ import java.util.Random;
 
 import me.phantom64.teamdeathmatch.TeamDeathMatch;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class TeamManager {
 	
@@ -30,8 +33,8 @@ public class TeamManager {
 	
 	public void setTeam(Player p, Team team) {
 		teams.put(p, team);
-		if (team == Team.RED) p.sendMessage("§dYour team was set to §cRed§d.");
-		else if (team == Team.BLUE) p.sendMessage("§dYour team was set to §9Blue§d.");
+		if (team == Team.RED) p.sendMessage("Â§dYour team was set to Â§cRedÂ§d.");
+		else if (team == Team.BLUE) p.sendMessage("Â§dYour team was set to Â§9BlueÂ§d.");
 	}
 	
 	public void removeFromTeam(Player p, Team team) {
@@ -42,19 +45,47 @@ public class TeamManager {
 		if (TeamDeathMatch.getRed().size() > TeamDeathMatch.getBlue().size()) return Team.BLUE;
 		else if (TeamDeathMatch.getBlue().size() > TeamDeathMatch.getRed().size()) return Team.RED;
 		else if (TeamDeathMatch.getRed().size() == TeamDeathMatch.getBlue().size()) {
-			int randomTeam = new Random().nextInt(1);
-			if (randomTeam == 0) {
-				return Team.RED;
-			} else if (randomTeam == 1) {
+			int randomTeam = new Random().nextInt(2);
+			if (randomTeam == 0 || randomTeam == 1) {
 				return Team.BLUE;
+			} else if (randomTeam == 2) {
+				return Team.RED;
 			}
 		} return null;
 	}
 	
+	public void givePlayerKit(Player p, Team team) {
+		PlayerInventory inv = p.getInventory();
+		inv.clear();
+		inv.setHelmet(new ItemStack(Material.AIR, 1));
+		inv.setChestplate(new ItemStack(Material.AIR, 1));
+		inv.setLeggings(new ItemStack(Material.AIR, 1));
+		inv.setBoots(new ItemStack(Material.AIR, 1));
+		if (getTeam(p) == Team.RED) {
+			inv.setHelmet(new ItemStack(Material.REDSTONE_BLOCK, 1));
+			inv.setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
+			inv.setLeggings(new ItemStack(Material.IRON_LEGGINGS, 1));
+			inv.setBoots(new ItemStack(Material.IRON_BOOTS, 1));
+			inv.addItem(new ItemStack(Material.IRON_SWORD, 1));
+			inv.addItem(new ItemStack(Material.BOW, 1));
+			inv.addItem(new ItemStack(Material.ARROW, 16));
+			p.sendMessage("Â§5[TDM] Â§dYou were given kit Â§cRedÂ§d.");
+		} else if (getTeam(p) == Team.BLUE) {
+			inv.setHelmet(new ItemStack(Material.LAPIS_BLOCK, 1));
+			inv.setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
+			inv.setLeggings(new ItemStack(Material.IRON_LEGGINGS, 1));
+			inv.setBoots(new ItemStack(Material.IRON_BOOTS, 1));
+			inv.addItem(new ItemStack(Material.IRON_SWORD, 1));
+			inv.addItem(new ItemStack(Material.BOW, 1));
+			inv.addItem(new ItemStack(Material.ARROW, 16));
+			p.sendMessage("Â§5[TDM] Â§dYou were given kit Â§9BlueÂ§d.");
+		}
+	}
+	
 	public String getPlayerNameInTeamColor(Player p) {
-		if (getTeam(p) == (Team.RED)) return "§c" + p.getName();
-		else if (getTeam(p) == (Team.BLUE)) return "§9" + p.getName();
-		else return "§7" + p.getName();
+		if (getTeam(p) == (Team.RED)) return "Â§c" + p.getName();
+		else if (getTeam(p) == (Team.BLUE)) return "Â§9" + p.getName();
+		else return "Â§7" + p.getName();
 	}
 
 }
