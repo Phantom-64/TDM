@@ -5,6 +5,7 @@ import java.util.List;
 
 import me.phantom64.teamdeathmatch.commands.CommandSetSpawn;
 import me.phantom64.teamdeathmatch.listeners.PlayerDeath;
+import me.phantom64.teamdeathmatch.listeners.PlayerJoin;
 import me.phantom64.teamdeathmatch.utils.GameManager;
 import me.phantom64.teamdeathmatch.utils.LocationHandler;
 import me.phantom64.teamdeathmatch.utils.TeamManager;
@@ -26,9 +27,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TeamDeathMatch extends JavaPlugin {
 	
-	public static GameManager gameManager = new GameManager(new TeamDeathMatch());
-	public static TeamManager teamManager = new TeamManager(new TeamDeathMatch());
-	public static LocationHandler locationHandler = new LocationHandler(new TeamDeathMatch());
+	public static GameManager gameManager;
+	public static TeamManager teamManager;
+	public static LocationHandler locationHandler;
 	
 	public static GameManager getGameManager() {
 		return gameManager;
@@ -55,8 +56,10 @@ public class TeamDeathMatch extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		addPlayersToTeamLists();
-		registerListeners(new PlayerDeath());
+		registerListeners(new PlayerDeath(), new PlayerJoin());
+		gameManager = new GameManager(this);
+		teamManager = new TeamManager(this);
+		locationHandler = new LocationHandler(this);
 	}
 	
 	private void registerListeners(Listener... listeners) {

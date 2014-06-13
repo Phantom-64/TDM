@@ -14,7 +14,7 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		e.setJoinMessage("§dWelcome §5" + e.getPlayer().getName() + " §dto the server.");
-		e.getPlayer().teleport(TeamDeathMatch.getLocationHandler().getExitSpawn());
+			e.getPlayer().teleport(TeamDeathMatch.getLocationHandler().getExitSpawn());
 		if (e.getPlayer().isOp()) {
 			if (lh.getRedSpawn()==null||lh.getBlueSpawn()==null||lh.getExitSpawn()==null) {
 				e.getPlayer().sendMessage("§5[TDM] §dAll the spawns are not set.");

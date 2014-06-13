@@ -3,3 +3,8 @@ main: me.phantom64.teamdeathmatch.TeamDeathMatch
 version: 1.0
 author: Phantom_64
 description: Full server take-over Team Death Match game mode plugin.
+
+commands:
+  tdm:
+    description: Standard command for the TDM plugin.
+    usage: /<command>
