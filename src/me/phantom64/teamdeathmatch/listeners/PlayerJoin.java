@@ -26,12 +26,6 @@ public class PlayerJoin implements Listener {
 		inv.setLeggings(new ItemStack(Material.AIR, 1));
 		inv.setBoots(new ItemStack(Material.AIR, 1));
 		p.teleport(TeamDeathMatch.getLocationHandler().getExitSpawn());
-		if (e.getPlayer().isOp()) {
-			if (lh.getRedSpawn()==null||lh.getBlueSpawn()==null||lh.getExitSpawn()==null) {
-				e.getPlayer().sendMessage("§5[TDM] §dAll the spawns are not set.");
-				e.getPlayer().sendMessage("§dSet them with /tdm setspawn <red/blue/exit> to be able to play.");
-			}
-		}
 	}
 
 }

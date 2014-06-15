@@ -26,7 +26,7 @@ public class PlayerDeath implements Listener {
 				p.setHealth(20.0);
 				if (teamManager.getTeam(p) == Team.RED) p.teleport(locationHandler.getRedSpawn());
 				else if (teamManager.getTeam(p) == Team.BLUE) p.teleport(locationHandler.getBlueSpawn());
-				gameManager.broadcastMessageInGame("§5[TDM] " + teamManager
+				gameManager.broadcastMessageInGame("§5[TDM] §r" + teamManager
 						.getPlayerNameInTeamColor(p)
 						+ " §dwas killed by §r"
 						+ teamManager.getPlayerNameInTeamColor(killer) + "§d.");

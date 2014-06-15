@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 
 public class CommandSetSpawn {
 	
+	@SuppressWarnings("unused")
+	private static TeamDeathMatch plugin;
+	
 	public static void execute(Player p, String[] a) {
 		
 		if (!p.isOp()) {

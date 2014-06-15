@@ -8,7 +8,9 @@ import me.phantom64.teamdeathmatch.commands.CommandLeave;
 import me.phantom64.teamdeathmatch.commands.CommandSetSpawn;
 import me.phantom64.teamdeathmatch.listeners.AsyncPlayerChat;
 import me.phantom64.teamdeathmatch.listeners.BlockListener;
+import me.phantom64.teamdeathmatch.listeners.EntityDamage;
 import me.phantom64.teamdeathmatch.listeners.EntityDamageByEntity;
+import me.phantom64.teamdeathmatch.listeners.FoodLevelChange;
 import me.phantom64.teamdeathmatch.listeners.InventoryClick;
 import me.phantom64.teamdeathmatch.listeners.PlayerDeath;
 import me.phantom64.teamdeathmatch.listeners.PlayerDropItem;
@@ -68,10 +70,12 @@ public class TeamDeathMatch extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		saveConfig();
 		registerListeners(new PlayerDeath(), new PlayerJoin(),
 				new PlayerQuit(), new AsyncPlayerChat(), new BlockListener(),
 				new InventoryClick(), new PlayerDropItem(),
-				new EntityDamageByEntity());
+				new EntityDamageByEntity(), new EntityDamage(),
+				new FoodLevelChange());
 		gameManager = new GameManager(this);
 		teamManager = new TeamManager(this);
 		locationHandler = new LocationHandler(this);

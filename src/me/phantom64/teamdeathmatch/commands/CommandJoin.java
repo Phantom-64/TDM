@@ -13,8 +13,12 @@ public class CommandJoin {
 			p.sendMessage("§dCorrect usage: §5/tdm join");
 		} else {
 			if (!TeamDeathMatch.getGameManager().isPlaying(p)) {
-				TeamDeathMatch.getGameManager().addPlayerToGame(p);
-				TeamDeathMatch.getGameManager().broadcastMessageInGame("§5[TDM] §r" + TeamDeathMatch.getTeamManager().getPlayerNameInTeamColor(p) + " §dhas joined the game!");
+				try {
+					TeamDeathMatch.getGameManager().addPlayerToGame(p);
+					TeamDeathMatch.getGameManager().broadcastMessageInGame("§5[TDM] §r" + TeamDeathMatch.getTeamManager().getPlayerNameInTeamColor(p) + " §dhas joined the game!");
+				} catch (NullPointerException npe) {
+					p.sendMessage("§cThe spawns are not set!");
+				}
 			} else {
 				p.sendMessage("§cYou are already in the game!");
 			}

@@ -6,6 +6,7 @@ import java.util.List;
 import me.phantom64.teamdeathmatch.TeamDeathMatch;
 import me.phantom64.teamdeathmatch.utils.TeamManager.Team;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,6 +30,7 @@ public class GameManager {
 		playing.add(p);
 		TeamDeathMatch.addPlayersToTeamLists();
 		Team team = TeamDeathMatch.getTeamManager().getValidTeam();
+		p.setGameMode(GameMode.ADVENTURE);
 		TeamDeathMatch.getLocationHandler().teleportPlayerToArena(p, team);
 		TeamDeathMatch.getTeamManager().givePlayerKit(p, team);
 	}
@@ -43,6 +45,7 @@ public class GameManager {
 		inv.setLeggings(new ItemStack(Material.AIR, 1));
 		inv.setBoots(new ItemStack(Material.AIR, 1));
 		TeamDeathMatch.addPlayersToTeamLists();
+		p.setGameMode(GameMode.SURVIVAL);
 		TeamDeathMatch.getLocationHandler().teleportPlayerFromArena(p);
 	}
 	
