@@ -15,7 +15,7 @@ public class AsyncPlayerChat implements Listener {
 		if (!TeamDeathMatch.getGameManager().isPlaying(p)) {
 			e.setFormat("§7" + p.getName() + " §f> " + "§8" + e.getMessage());
 		} else {
-			e.setFormat("§5[§dTDM§5] §r" + TeamDeathMatch.getTeamManager().getPlayerNameInTeamColor(p) + " §7> §f" + e.getMessage());
+			e.setFormat("§5[TDM] §r" + TeamDeathMatch.getTeamManager().getPlayerNameInTeamColor(p) + " §7> §f" + e.getMessage());
 		}
 	}
 

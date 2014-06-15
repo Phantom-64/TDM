@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.phantom64.teamdeathmatch.commands.CommandJoin;
+import me.phantom64.teamdeathmatch.commands.CommandKickAll;
 import me.phantom64.teamdeathmatch.commands.CommandLeave;
 import me.phantom64.teamdeathmatch.commands.CommandSetSpawn;
 import me.phantom64.teamdeathmatch.listeners.AsyncPlayerChat;
@@ -36,7 +37,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 
 /**
- * TO-DO: Config integration
+ * TO-DO:
+ * 
  */
 
 public class TeamDeathMatch extends JavaPlugin {
@@ -114,13 +116,17 @@ public class TeamDeathMatch extends JavaPlugin {
 			if (sender instanceof Player) {
 				if (args.length == 0) {
 					((Player) sender)
-							.sendMessage("§5TDM plugin made by §dPhantom_64§5! §5Available arguments: setspawn");
+							.sendMessage("§5TDM plugin made by §dPhantom_64§5! §5Available arguments: setspawn, join, leave");
 				} else if (args[0].equalsIgnoreCase("setspawn")) {
 					CommandSetSpawn.execute((Player) sender, args);
 				} else if (args[0].equalsIgnoreCase("join")) {
 					CommandJoin.execute(((Player) sender), args);
 				} else if (args[0].equalsIgnoreCase("leave")) {
 					CommandLeave.execute(((Player) sender), args);
+				} else if (args[0].equalsIgnoreCase("kickall")) {
+					CommandKickAll.execute(((Player)sender), args);
+				} else {
+					((Player)sender).sendMessage("§dInvalid argument.");
 				}
 			} else {
 				sender.sendMessage(ChatColor.RED

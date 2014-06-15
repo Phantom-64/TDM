@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class EntityDamageByEntity implements Listener {
 	
+	private TeamDeathMatch plugin;
+	
 	GameManager gm = TeamDeathMatch.getGameManager();
 	TeamManager tm = TeamDeathMatch.getTeamManager();
 	
@@ -33,20 +35,28 @@ public class EntityDamageByEntity implements Listener {
 	
 	@EventHandler
 	public void onPlayerDamageByArrow(EntityDamageByEntityEvent e) {
-		if (e.getEntity() instanceof Player) {
-			Player p = (Player) e.getEntity();
-			if (e.getDamager() instanceof Arrow) {
-				Arrow arrow = (Arrow) e.getDamager();
-				if (arrow.getShooter() instanceof Player) {
-					Player shooter = (Player) arrow.getShooter();
-					if (gm.isPlaying(p) && gm.isPlaying(shooter)) {
-						if (tm.getTeam(p) == tm.getTeam(shooter)) {
-							e.setCancelled(true);
-							shooter.sendMessage("§cThat's your teammate!");
+		try {
+			if (e.getEntity() instanceof Player) {
+				Player p = (Player) e.getEntity();
+				if (e.getDamager() instanceof Arrow) {
+					Arrow arrow = (Arrow) e.getDamager();
+					if (arrow.getShooter() instanceof Player) {
+						Player shooter = (Player) arrow.getShooter();
+						if (gm.isPlaying(p) && gm.isPlaying(shooter)) {
+							if (tm.getTeam(p) == tm.getTeam(shooter)) {
+								if (shooter == p) {
+									e.setCancelled(true);
+								} else if (shooter != p) {
+									e.setCancelled(true);
+									shooter.sendMessage("§cThat's your teammate!");
+								}
+							}
 						}
 					}
 				}
 			}
+		} catch (NullPointerException npe) {
+			plugin.getLogger().info("Null pointer exception? .-.");
 		}
 	}
 

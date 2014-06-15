@@ -27,7 +27,7 @@ public class GameManager {
 	}
 	
 	public void addPlayerToGame(Player p) {
-		playing.add(p);
+		getPlaying().add(p);
 		TeamDeathMatch.addPlayersToTeamLists();
 		Team team = TeamDeathMatch.getTeamManager().getValidTeam();
 		p.setGameMode(GameMode.ADVENTURE);
@@ -36,7 +36,7 @@ public class GameManager {
 	}
 	
 	public void removePlayerFromGame(Player p) {
-		playing.remove(p);
+		getPlaying().remove(p);
 		TeamDeathMatch.getTeamManager().removeFromTeam(p, TeamDeathMatch.getTeamManager().getTeam(p));
 		PlayerInventory inv = p.getInventory();
 		inv.clear();

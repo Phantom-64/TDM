@@ -33,8 +33,8 @@ public class TeamManager {
 	
 	public void setTeam(Player p, Team team) {
 		teams.put(p, team);
-		if (team == Team.RED) p.sendMessage("§dYour team was set to §cRed§d.");
-		else if (team == Team.BLUE) p.sendMessage("§dYour team was set to §9Blue§d.");
+		if (team == Team.RED) p.sendMessage("§5[TDM] §dYour team was set to §cRed§d.");
+		else if (team == Team.BLUE) p.sendMessage("§5[TDM] §dYour team was set to §9Blue§d.");
 	}
 	
 	public void removeFromTeam(Player p, Team team) {
@@ -68,7 +68,7 @@ public class TeamManager {
 			inv.setBoots(new ItemStack(Material.IRON_BOOTS, 1));
 			inv.addItem(new ItemStack(Material.IRON_SWORD, 1));
 			inv.addItem(new ItemStack(Material.BOW, 1));
-			inv.addItem(new ItemStack(Material.ARROW, 16));
+			inv.addItem(new ItemStack(Material.ARROW, 32));
 			p.sendMessage("§5[TDM] §dYou were given kit §cRed§d.");
 		} else if (getTeam(p) == Team.BLUE) {
 			inv.setHelmet(new ItemStack(Material.LAPIS_BLOCK, 1));
@@ -77,7 +77,7 @@ public class TeamManager {
 			inv.setBoots(new ItemStack(Material.IRON_BOOTS, 1));
 			inv.addItem(new ItemStack(Material.IRON_SWORD, 1));
 			inv.addItem(new ItemStack(Material.BOW, 1));
-			inv.addItem(new ItemStack(Material.ARROW, 16));
+			inv.addItem(new ItemStack(Material.ARROW, 32));
 			p.sendMessage("§5[TDM] §dYou were given kit §9Blue§d.");
 		}
 	}
